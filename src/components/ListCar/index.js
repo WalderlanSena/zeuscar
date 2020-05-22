@@ -18,7 +18,7 @@ export default function ListCar(props) {
     >
       <CardCar>
         <CardMedia
-          style={{ width: 250 }}
+          style={{ width: 250, height: 188 }}
           component="img"
           image={offer.photos[offer.photos.length - 1].url}
         />

@@ -28,6 +28,7 @@ export default function ListCarGrid(props) {
         onClick={() => history.push(`/oferta/${offer.id}`)}
       >
         <CardMedia
+          height={212}
           component="img"
           image={offer.photos[offer.photos.length - 1].url}
         />
