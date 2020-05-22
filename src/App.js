@@ -1,7 +1,9 @@
 import React from "react";
 import Routes from "./routes";
+import GlobalStyle from "./assets/global";
 import { Router } from "react-router-dom";
 import history from "./services/history";
+import Header from "./components/Header";
 import { createMuiTheme, MuiThemeProvider } from "@material-ui/core";
 
 export default function App() {
@@ -19,6 +21,8 @@ export default function App() {
   return (
     <Router history={history}>
       <MuiThemeProvider theme={theme}>
+        <Header />
+        <GlobalStyle />
         <Routes />
       </MuiThemeProvider>
     </Router>
