@@ -51,19 +51,21 @@ export default function Offer() {
         {viewMode && offers.length > 0 ? (
           <ListCarGrid offersList={offers} />
         ) : (
-          <>
-            <Grid item sm={12} md={4} lg={4}>
-              <Skeleton variant="rect" width={"100%"} height={350} />
-            </Grid>
+          viewMode && (
+            <>
+              <Grid item sm={12} md={4} lg={4}>
+                <Skeleton variant="rect" width={"100%"} height={350} />
+              </Grid>
 
-            <Grid item sm={12} md={4} lg={4}>
-              <Skeleton variant="rect" width={"100%"} height={350} />
-            </Grid>
+              <Grid item sm={12} md={4} lg={4}>
+                <Skeleton variant="rect" width={"100%"} height={350} />
+              </Grid>
 
-            <Grid item sm={12} md={4} lg={4}>
-              <Skeleton variant="rect" width={"100%"} height={350} />
-            </Grid>
-          </>
+              <Grid item sm={12} md={4} lg={4}>
+                <Skeleton variant="rect" width={"100%"} height={350} />
+              </Grid>
+            </>
+          )
         )}
       </Grid>
     </Container>
