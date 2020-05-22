@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Grid, Typography, Button } from "@material-ui/core";
+import Skeleton from "@material-ui/lab/Skeleton";
 import ViewModuleIcon from "@material-ui/icons/ViewModule";
 import ViewStreamIcon from "@material-ui/icons/ViewStream";
 import { getOffers } from "../../services/offer";
@@ -47,7 +48,23 @@ export default function Offer() {
           <Typography variant={"h5"}>Ofertas Disponíveis</Typography>
         </Grid>
         {!viewMode && offers.length > 0 && <ListCar offersList={offers} />}
-        {viewMode && offers.length > 0 && <ListCarGrid offersList={offers} />}
+        {viewMode && offers.length > 0 ? (
+          <ListCarGrid offersList={offers} />
+        ) : (
+          <>
+            <Grid item sm={12} md={4} lg={4}>
+              <Skeleton variant="rect" width={"100%"} height={350} />
+            </Grid>
+
+            <Grid item sm={12} md={4} lg={4}>
+              <Skeleton variant="rect" width={"100%"} height={350} />
+            </Grid>
+
+            <Grid item sm={12} md={4} lg={4}>
+              <Skeleton variant="rect" width={"100%"} height={350} />
+            </Grid>
+          </>
+        )}
       </Grid>
     </Container>
   );
