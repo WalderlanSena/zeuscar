@@ -9,12 +9,15 @@ export const CardCar = styled(Card)`
 
 export const Detail = styled.div`
   display: flex;
-  justify-content: space-between;
   width: 100%;
-  max-width: 980px;
-  min-width: 300px;
+  justify-content: space-between;
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 10px 10px;
+`;
+
+export const ModelText = styled.p`
+  color: #787878;
+  font-size: 16px;
 `;
 
 export const Price = styled.div`
@@ -23,5 +26,12 @@ export const Price = styled.div`
   justify-content: flex-end;
   border-left: 1px solid #ccc;
   padding: 10px;
+  align-items: center;
+`;
+
+export const ButtonBottom = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
 `;
