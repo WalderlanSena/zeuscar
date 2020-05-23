@@ -5,6 +5,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import DefaultContainer from "../../components/DefaultContainer";
 
 import MUIDataTable from "mui-datatables";
 import DeleteOutlineOutlinedIcon from "@material-ui/icons/DeleteOutlineOutlined";
@@ -159,7 +160,7 @@ export default function Admin() {
   };
 
   return (
-    <Container>
+    <DefaultContainer maxWidth={"lg"} currentPage={"Administração"}>
       <Grid container>
         <Grid
           style={{
@@ -218,6 +219,6 @@ export default function Admin() {
           </Button>
         </DialogActions>
       </Dialog>
-    </Container>
+    </DefaultContainer>
   );
 }
