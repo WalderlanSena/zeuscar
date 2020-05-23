@@ -51,8 +51,8 @@ export const createOffer = async (offerObject) => {
   const photos = Array.from(offerObject.photos);
   const promises = [];
 
-  photos.forEach((file) => {
-    promises.push(uploadImages(file));
+  photos.forEach((file, index) => {
+    promises.push(uploadImages(file, index));
   });
 
   Promise.all(promises)
@@ -83,17 +83,31 @@ export const update = (id, collection, offerUpdate) => {
   return true;
 };
 
-export const deleteOffer = (id) => {
-  try {
-    firestore.collection("db").doc(id).delete();
-    return true;
-  } catch (error) {
-    return error;
-  }
+export const deleteOffer = async (id) => {
+  let offer = await getById(id, "offers");
+  offer[0].photos.map((photo) => {
+    let name = photo.url.substr(
+      photo.url.indexOf("%2F") + 3,
+      photo.url.indexOf("?") - (photo.url.indexOf("%2F") + 3)
+    );
+    name = name.replace("%20", " ");
+    const ref = storage.ref();
+    let photoRef = ref.child(`images/${name}`);
+    photoRef
+      .delete()
+      .then(function () {
+        firestore.collection("offers").doc(offer[0].id).delete();
+        return true;
+      })
+      .catch(function (error) {
+        return error;
+      });
+  });
+  return true;
 };
 
-export const uploadImages = async (image) => {
-  let storageRef = storage().ref(`images/${new Date()}_${image.name}`);
+export const uploadImages = async (image, index) => {
+  let storageRef = storage.ref(`images/${index}_${image.name}`);
   return storageRef
     .put(image)
     .then((snapshot) => snapshot.ref.getDownloadURL())

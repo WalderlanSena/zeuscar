@@ -37,7 +37,7 @@ export default function ListCar(props) {
               <ModelText>{offer.model}</ModelText>
             </div>
 
-            <div>Ano / {offer.year}</div>
+            <div>Ano - {offer.year}</div>
 
             <div
               style={{
@@ -55,9 +55,7 @@ export default function ListCar(props) {
             </div>
           </div>
           <Price>
-            <Typography variant={"h6"}>
-              R$ {currencyFormat(offer.price)}
-            </Typography>
+            <Typography variant={"h6"}>{offer.price}</Typography>
           </Price>
         </Detail>
       </CardCar>

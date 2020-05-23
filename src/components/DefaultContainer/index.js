@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) =>
 export default function DefaultContainer(props) {
   const classes = useStyles();
   return (
-    <Container maxWidth={"md"}>
+    <Container maxWidth={props.maxWidth || "md"}>
       <Paper elevation={0} className={classes.paper}>
         <Breadcrumbs aria-label="breadcrumb">
           <Link className={classes.link} to={"/"}>

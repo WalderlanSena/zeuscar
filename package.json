@@ -11,6 +11,7 @@
     "@testing-library/user-event": "^7.1.2",
     "firebase": "^7.14.4",
     "history": "^4.10.1",
+    "mui-datatables": "^2.14.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hook-form": "^5.7.2",
