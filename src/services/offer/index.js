@@ -1,7 +1,19 @@
 import { get, getById, update } from "../api";
+import { formatFirebaseDate, currencyFormat } from "../utils";
 
-export const getOffers = () => {
-  return get("offers");
+export const getOffers = async () => {
+  let offers = await get("offers");
+
+  let data = [];
+
+  offers.map((offer, index) => {
+    offers[index].registration = formatFirebaseDate(
+      offer.registration.toDate()
+    );
+    offers[index].price = "R$ " + currencyFormat(offer.price).toString();
+    data.push(offers[index]);
+  });
+  return data;
 };
 
 export const getOfferById = async (id) => {
@@ -22,5 +34,3 @@ export const getOfferById = async (id) => {
 export const updateOffer = (id, offerUpdate) => {
   return update(id, "offers", offerUpdate);
 };
-
-export const createOffer = () => {};
