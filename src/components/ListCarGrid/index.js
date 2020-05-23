@@ -45,11 +45,11 @@ export default function ListCarGrid(props) {
           </Typography>
 
           <Typography variant="body2" color="textSecondary" component="h5">
-            Ano / {offer.year}
+            Ano - {offer.year}
           </Typography>
 
           <Typography variant="h5" style={{ marginTop: 10 }}>
-            R$ {currencyFormat(offer.price)}
+            {offer.price}
           </Typography>
         </CardContent>
         <CardActions
