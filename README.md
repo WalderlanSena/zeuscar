@@ -39,8 +39,40 @@ This is a basic project developed with React js and the <a href="https://materia
 
 ## Instalation
 
+Download the repository that the following command
+
 ```
 git@github.com:WalderlanSena/zeuscar.git
 ```
 
+## .env File
 
+Move the **.env.test** file to .env and add your **Firebase** settings
+
+## Install dependency
+Inside the application directory, run your package manager. That in my case I used yarn.
+```
+yarn
+```
+
+Subsequently run the application
+
+```
+yarn start
+```
+Finishing the execution you will possibly have this exit in the terminal. Soon your browser was to open a tab at the address: **https://localhost:3000**
+
+```
+Compiled successfully!
+
+You can now view darkmira-carsale in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://<Your Ip Address>:3000
+
+Note that the development build is not optimized.
+To create a production build, use yarn build.
+```
+
+# License
+The Zeus Car is open source software licensed under the MIT license.
