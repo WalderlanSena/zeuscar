@@ -6,7 +6,7 @@ export const getOffers = async () => {
 
   let data = [];
 
-  offers.map((offer, index) => {
+  offers.forEach((offer, index) => {
     offers[index].registration = formatFirebaseDate(
       offer.registration.toDate()
     );
@@ -21,7 +21,7 @@ export const getOfferById = async (id) => {
 
   let galery = [];
 
-  offers[0].photos.map((photo) => {
+  offers[0].photos.forEach((photo) => {
     galery.push({
       original: photo.url,
       thumbnail: photo.url,
@@ -50,7 +50,7 @@ export const updateOffer = async (id, offerUpdate) => {
     })
     .finally(async () => {
       delete offerUpdate.newPhotos;
-      photosUploaded.map((item) => {
+      photosUploaded.forEach((item) => {
         offerUpdate.photos.push(item);
       });
       await update(id, "offers", offerUpdate);

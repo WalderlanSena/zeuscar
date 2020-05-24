@@ -3,7 +3,6 @@ import { Grid, CardMedia, Typography } from "@material-ui/core";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import RemoveRedEyeOutlinedIcon from "@material-ui/icons/RemoveRedEyeOutlined";
 import history from "../../services/history";
-import { currencyFormat } from "../../services/utils";
 import { Detail, Price, CardCar, ButtonBottom, ModelText } from "./styles";
 
 export default function ListCar(props) {

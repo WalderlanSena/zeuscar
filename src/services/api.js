@@ -85,7 +85,7 @@ export const update = async (id, collection, offerUpdate) => {
 
 export const deleteOffer = async (id) => {
   let offer = await getById(id, "offers");
-  offer[0].photos.map((photo) => {
+  offer[0].photos.forEach((photo) => {
     let name = photo.url.substr(
       photo.url.indexOf("%2F") + 3,
       photo.url.indexOf("?") - (photo.url.indexOf("%2F") + 3)
