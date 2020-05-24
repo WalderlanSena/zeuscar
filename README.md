@@ -10,22 +10,37 @@ This is a basic project developed with React js and the <a href="https://materia
 
 # Home Page
 <p align="center">
-  <img src="https://github.com/WalderlanSena/zeuscar/blob/feature/docs/docs/01.png" />
+  <img src="https://github.com/WalderlanSena/zeuscar/blob/develop/docs/01.png" />
 </p>
 
 <p align="center">
-  <img src="https://github.com/WalderlanSena/zeuscar/blob/feature/docs/docs/02.png" />
+  <img src="https://github.com/WalderlanSena/zeuscar/blob/develop/docs/02.png" />
 </p>
 
 # Admin
 
 <p align="center">
-  <img src="https://github.com/WalderlanSena/zeuscar/blob/feature/docs/docs/03.png" />
+  <img src="https://github.com/WalderlanSena/zeuscar/blob/develop/docs/03.png" />
 </p>
 
 <p align="center">
-  <img src="https://github.com/WalderlanSena/zeuscar/blob/feature/docs/docs/04.png" />
+  <img src="https://github.com/WalderlanSena/zeuscar/blob/develop/docs/06.png" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/WalderlanSena/zeuscar/blob/develop/docs/04.png" />
+</p>
+
+<p align="center">
+  <img src="https://github.com/WalderlanSena/zeuscar/blob/develop/docs/05.png" />
 </p>
 
 # Use
+
+## Instalation
+
+```
+git@github.com:WalderlanSena/zeuscar.git
+```
+
 
