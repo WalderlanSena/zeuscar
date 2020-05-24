@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grid, Button } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
@@ -186,7 +186,7 @@ export default function Admin() {
           <MUIDataTable
             title={"Ofertas cadastradas"}
             data={data}
-            loading={true}
+            loading={loading}
             columns={columns}
             options={options}
           />

@@ -49,6 +49,7 @@ export default function NewOffer(props) {
     city: string().required(
       "A cidade do veículo é necessária para cadastrar uma oferta."
     ),
+    photos: string().required("Selecione uma foto para o veiculo."),
   });
 
   const { register, handleSubmit, errors, setValue } = useForm({
@@ -116,7 +117,7 @@ export default function NewOffer(props) {
       setValue("city", response.city);
       const data = [];
 
-      response.photos.map((photo) => {
+      response.photos.forEach((photo) => {
         data.push(photo);
       });
       setPreviewUpdated(data);
@@ -125,7 +126,7 @@ export default function NewOffer(props) {
     if (id) {
       getOffer();
     }
-  }, [id]);
+  }, [id, setValue]);
 
   function onSelectPhotos(event) {
     if (!id) {
@@ -140,7 +141,8 @@ export default function NewOffer(props) {
     setLoading(true);
     if (!id) {
       await createOffer(Object.assign({ photos: thumbnail }, data));
-      toast.success("Oferta adicionado com shasOwnPropertyucesso !");
+      toast.success("Oferta adicionado com sucesso !");
+      setLoading(false);
       return true;
     }
     data.photos = previewUpdated;
@@ -342,7 +344,11 @@ export default function NewOffer(props) {
 
             <ContainerPhotos>
               {preview.length === 0 && previewUpdated.length === 0 ? (
-                <h3 style={{ color: "#787878" }}>Nenhuma Imagem Selecionada</h3>
+                <h3 style={{ color: "#787878" }}>
+                  {errors.photos
+                    ? errors.photos.message
+                    : "Nenhuma Imagem Selecionada."}
+                </h3>
               ) : (
                 ""
               )}
