@@ -14,7 +14,6 @@ export default function Offer() {
   useEffect(() => {
     async function findOffers() {
       const response = await getOffers();
-      console.log(response);
       setOffers(response);
     }
     findOffers();
@@ -48,9 +47,10 @@ export default function Offer() {
           <Typography variant={"h5"}>Ofertas Disponíveis</Typography>
         </Grid>
         {!viewMode && offers.length > 0 && <ListCar offersList={offers} />}
-        {viewMode && offers.length > 0 ? (
+        {viewMode && offers && offers.length > 0 ? (
           <ListCarGrid offersList={offers} />
         ) : (
+          offers.length !== 0 &&
           viewMode && (
             <>
               <Grid item sm={12} md={4} lg={4}>
