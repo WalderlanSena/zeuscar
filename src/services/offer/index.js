@@ -1,4 +1,4 @@
-import { get, getById, update } from "../api";
+import { get, getById, update, uploadImages } from "../api";
 import { formatFirebaseDate, currencyFormat } from "../utils";
 
 export const getOffers = async () => {
@@ -31,6 +31,29 @@ export const getOfferById = async (id) => {
   return Object.assign(offers[0], { galery: galery });
 };
 
-export const updateOffer = (id, offerUpdate) => {
-  return update(id, "offers", offerUpdate);
+export const updateOffer = async (id, offerUpdate) => {
+  if (!offerUpdate.hasOwnProperty("newPhotos")) {
+    return update(id, "offers", offerUpdate);
+  }
+
+  const photos = Array.from(offerUpdate.newPhotos);
+  const promises = [];
+  let photosUploaded = [];
+
+  photos.forEach((file, index) => {
+    promises.push(uploadImages(file, index));
+  });
+
+  Promise.all(promises)
+    .then((imageInfo) => {
+      photosUploaded = imageInfo;
+    })
+    .finally(async () => {
+      delete offerUpdate.newPhotos;
+      photosUploaded.map((item) => {
+        offerUpdate.photos.push(item);
+      });
+      await update(id, "offers", offerUpdate);
+      return true;
+    });
 };

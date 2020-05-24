@@ -21,14 +21,13 @@ export const PhotoItem = styled.div`
   height: 150px;
   margin: 5px;
   border-radius: 5px;
-  background-color: red;
-  box-shadow: 5px rgba(0, 0, 0, 0.1);
   cursor: pointer;
 
   img {
     width: 250px;
     height: 150px;
     object-fit: cover;
-    border-radius: 5px;
+    border-radius: 4px;
+    box-shadow: 15px 5px 5px rgba(0, 0, 0, 0.1);
   }
 `;

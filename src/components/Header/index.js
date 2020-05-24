@@ -99,7 +99,11 @@ export default function Header() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <SwipeableDrawer open={open} onClose={toggleDrawer("left", false)}>
+      <SwipeableDrawer
+        open={open}
+        onOpen={toggleDrawer("left", false)}
+        onClose={toggleDrawer("left", false)}
+      >
         {list("left")}
       </SwipeableDrawer>
     </div>

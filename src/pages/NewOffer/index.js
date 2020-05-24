@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import DefaultContainer from "../../components/DefaultContainer";
 import {
   TextField,
@@ -7,6 +7,7 @@ import {
   Typography,
   Button,
 } from "@material-ui/core";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -21,6 +22,8 @@ import { ContainerPhotos, PhotoItem, TitlePhotos } from "./styles";
 import { createOffer } from "../../services/api";
 
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
+import { getOfferById, updateOffer } from "../../services/offer";
 
 export default function NewOffer(props) {
   const schema = object().shape({
@@ -48,13 +51,16 @@ export default function NewOffer(props) {
     ),
   });
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, setValue } = useForm({
     validationSchema: schema,
   });
 
   const [thumbnail, setThumbnail] = useState([]);
+  const [thumbnailUpdate, setThumbnailUpdate] = useState([]);
+  const [previewUpdated, setPreviewUpdated] = useState([]);
   const [open, setOpen] = useState(false);
   const [excludePhoto, setExcludePhoto] = useState();
+  const [loading, setLoading] = useState(false);
 
   const handleClickOpen = (key) => {
     setExcludePhoto(key);
@@ -62,7 +68,12 @@ export default function NewOffer(props) {
   };
 
   const handleRemovePhoto = () => {
-    preview.splice(excludePhoto, 1);
+    if (!id) {
+      preview.splice(excludePhoto, 1);
+      setOpen(false);
+      return true;
+    }
+    previewUpdated.splice(excludePhoto, 1);
     setOpen(false);
   };
 
@@ -80,17 +91,74 @@ export default function NewOffer(props) {
     return data;
   }, [thumbnail]);
 
+  const newPreviewUpdate = useMemo(() => {
+    let data = [];
+
+    Array.from(thumbnailUpdate).forEach((file) => {
+      data.push(URL.createObjectURL(file));
+    });
+
+    return data;
+  }, [thumbnailUpdate]);
+
+  let { id } = useParams();
+
+  useEffect(() => {
+    async function getOffer() {
+      const response = await getOfferById(id);
+      setValue("brand", response.brand);
+      setValue("model", response.model);
+      setValue("year", response.year);
+      setValue("price", parseInt(response.price));
+      setValue("color", response.color);
+      setValue("mileage", response.mileage);
+      setValue("plate", response.plate);
+      setValue("city", response.city);
+      const data = [];
+
+      response.photos.map((photo) => {
+        data.push(photo);
+      });
+      setPreviewUpdated(data);
+    }
+
+    if (id) {
+      getOffer();
+    }
+  }, [id]);
+
   function onSelectPhotos(event) {
-    setThumbnail(event.target.files);
+    if (!id) {
+      setThumbnail(event.target.files);
+      return true;
+    }
+    setThumbnailUpdate(event.target.files);
   }
 
   async function onSubmit(data) {
-    await createOffer(Object.assign({ photos: thumbnail }, data));
-    toast.success("Oferta adicionado com sucesso !");
+    window.scrollTo(0, 0);
+    setLoading(true);
+    if (!id) {
+      await createOffer(Object.assign({ photos: thumbnail }, data));
+      toast.success("Oferta adicionado com shasOwnPropertyucesso !");
+      return true;
+    }
+    data.photos = previewUpdated;
+    if (thumbnailUpdate.length > 0) {
+      data.newPhotos = thumbnailUpdate;
+    }
+    let offerData = data;
+    await updateOffer(id, offerData);
+    setLoading(false);
+    toast.success("Oferta atualizada com sucesso.");
   }
 
   return (
-    <DefaultContainer currentPage={"Nova Oferta"} title={"Nova Oferta"}>
+    <DefaultContainer
+      currentPage={!id ? "Nova Oferta" : "Atualizar Oferta"}
+      title={!id ? "Nova Oferta" : "Atualizar Oferta"}
+    >
+      {loading && <LinearProgress />}
       <Card>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -273,12 +341,24 @@ export default function NewOffer(props) {
             </TitlePhotos>
 
             <ContainerPhotos>
-              {preview.length === 0 ? (
+              {preview.length === 0 && previewUpdated.length === 0 ? (
                 <h3 style={{ color: "#787878" }}>Nenhuma Imagem Selecionada</h3>
               ) : (
                 ""
               )}
               {preview.map((item, key) => (
+                <PhotoItem key={key} onClick={() => handleClickOpen(key)}>
+                  <img src={item} alt="img" />
+                </PhotoItem>
+              ))}
+
+              {previewUpdated.map((item, key) => (
+                <PhotoItem key={key} onClick={() => handleClickOpen(key)}>
+                  <img src={item.url} alt="img" />
+                </PhotoItem>
+              ))}
+
+              {newPreviewUpdate.map((item, key) => (
                 <PhotoItem key={key} onClick={() => handleClickOpen(key)}>
                   <img src={item} alt="img" />
                 </PhotoItem>
@@ -291,10 +371,10 @@ export default function NewOffer(props) {
               fullWidth
               variant="contained"
               color="primary"
-              // disabled={loading}
+              disabled={loading}
             >
-              Adicionar
-              {/* <AddShoppingCartIcon/> {!id && ' Adicionar'}{id && ' Atualizar Produto'} */}
+              {!id && " Adicionar"}
+              {id && " Atualizar Oferta"}
             </Button>
           </form>
         </CardContent>

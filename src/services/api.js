@@ -78,7 +78,7 @@ export const createOffer = async (offerObject) => {
     });
 };
 
-export const update = (id, collection, offerUpdate) => {
+export const update = async (id, collection, offerUpdate) => {
   firestore.collection(collection).doc(id).update(offerUpdate);
   return true;
 };
