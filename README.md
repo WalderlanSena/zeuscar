@@ -75,4 +75,4 @@ To create a production build, use yarn build.
 ```
 
 # License
-The Zeus Car is open source software licensed under the MIT license.
+The Zeus Car is open source software licensed under the <a href="https://github.com/WalderlanSena/zeuscar/blob/master/LICENSE">MIT license.</a>
