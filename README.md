@@ -65,10 +65,10 @@ Finishing the execution you will possibly have this exit in the terminal. Soon y
 ```
 Compiled successfully!
 
-You can now view darkmira-carsale in the browser.
+You can now view zeuscarweb in the browser.
 
   Local:            http://localhost:3000
-  On Your Network:  http://<Your Ip Address>:3000
+  On Your Network:  http://192.168.15.3:3000
 
 Note that the development build is not optimized.
 To create a production build, use yarn build.
